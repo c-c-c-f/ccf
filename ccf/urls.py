@@ -24,10 +24,13 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('django-admin/', admin.site.urls),
     # wagtail
-    path('cms/', include(wagtailadmin_urls)),
+    path('admin/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
     path('pages/', include(wagtail_urls)),
-    path('', include('home.urls'), name='home'),
+    # my stuff
+    re_path(r'', include('home.urls'), name='home'),
+    # wagtail catchall
+    re_path(r'', include(wagtail_urls)),    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

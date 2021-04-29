@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -35,12 +36,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+
+    # my stuff
+    "home",
+    "news",
     # wagtail
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -56,9 +55,13 @@ INSTALLED_APPS = [
     # Wagtail dependencies
     "modelcluster",
     "taggit",
-    # my stuff
-    "home",
-    "news",
+    # Django stuff
+    "django.contrib.admin", # default with django, remove for wagtail    
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",    
 ]
 
 MIDDLEWARE = [
@@ -148,12 +151,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = "/static/"
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
+# STATICFILES_DIRS = [
+#     os.path.join(PROJECT_DIR, 'static'),
+# ]
 
 # Static Root
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
+STATIC_URL = "/static/"
 
 # Media files
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -161,3 +170,6 @@ MEDIA_URL = "/media/"
 
 # Wagtail site name
 WAGTAIL_SITE_NAME = "Computing Curricula Foundation"
+
+# Reverse the default case-sensitive handling of tags
+TAGGIT_CASE_INSENSITIVE = True
