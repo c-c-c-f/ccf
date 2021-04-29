@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "taggit",
     # my stuff
     "home",
+    "news",
 ]
 
 MIDDLEWARE = [
