@@ -115,3 +115,14 @@ class NewsPageGalleryImage(Orderable):
         ImageChooserPanel("image"),
         FieldPanel("caption"),
     ]
+
+
+class NewsPageRelatedLink(Orderable):
+    page = ParentalKey(NewsPage, on_delete=models.CASCADE, related_name="related_links")
+    name = models.CharField(max_length=255)
+    url = models.URLField()
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("url"),
+    ]
