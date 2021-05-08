@@ -5,5 +5,7 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-    {{ page.body|richtext }}
+    {% comment %} {{ page.body|richtext }} {% endcomment %}
+    {% include 'home/hero_section.html'  %}
+    {% include 'home/about_section.html'  %}    
 {% endblock %}
