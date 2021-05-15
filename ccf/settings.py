@@ -173,3 +173,6 @@ WAGTAIL_SITE_NAME = "Computing Curricula Foundation"
 
 # Reverse the default case-sensitive handling of tags
 TAGGIT_CASE_INSENSITIVE = True
+
+# Django 3.2 requirement
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

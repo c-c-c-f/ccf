@@ -1,7 +1,6 @@
 from django import forms
 from django.db import models
 
-
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
