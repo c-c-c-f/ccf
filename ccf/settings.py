@@ -32,7 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -156,12 +155,12 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# STATICFILES_DIRS = [
-#     os.path.join(PROJECT_DIR, 'static'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_DIR, 'static'),
+]
 
 # Static Root
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 
 # Media files
