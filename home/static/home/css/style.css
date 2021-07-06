@@ -1,5 +1,5 @@
 /**
-* Template Name: FlexStart - v1.1.1
+* Template Name: FlexStart - v1.4.0
 * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
@@ -217,7 +217,7 @@ section {
   position: relative;
 }
 
-.navbar a {
+.navbar a, .navbar a:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -230,13 +230,13 @@ section {
   transition: 0.3s;
 }
 
-.navbar a i {
+.navbar a i, .navbar a:focus i {
   font-size: 12px;
   line-height: 0;
   margin-left: 5px;
 }
 
-.navbar a:hover, .navbar .active, .navbar li:hover > a {
+.navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
   color: #4154f1;
 }
 
