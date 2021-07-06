@@ -68,23 +68,30 @@ class NewsPageTag(TaggedItemBase):
 
 
 class NewsPage(Page):
+    """
+    Showing a news item
+    """
+
+    body = RichTextField(blank=True)
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
     categories = ParentalManyToManyField("news.NewsCategory", blank=True)
-
-    def main_image(self):
-        gallery_item = self.gallery_images.first()
-        if gallery_item:
-            return gallery_item.image
-        else:
-            return None
+    feed_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField("intro"),
         index.SearchField("body"),
+        index.SearchField("date"),
     ]
+
+    # Editor panels configuration
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -96,8 +103,40 @@ class NewsPage(Page):
             heading="News information",
         ),
         FieldPanel("intro"),
-        FieldPanel("body"),
+        FieldPanel("body", classname="full"),
+        InlinePanel("related_links", label="Related Links"),
         InlinePanel("gallery_images", label="Gallery images"),
+    ]
+
+    promote_panels = [
+        MultiFieldPanel(Page.promote_panels, "Common page configuration"),
+        ImageChooserPanel("feed_image"),
+    ]
+
+    # master detail rules (parent / subpage)
+    parent_page_types = ["news.NewsIndexPage"]
+    subpage_types = []
+
+    def main_image(self):
+        gallery_item = self.gallery_images.first()
+        if gallery_item:
+            return gallery_item.image
+        else:
+            return None
+
+
+class NewsPageRelatedLink(Orderable):
+    """
+    Related links for a news item
+    """
+
+    page = ParentalKey(NewsPage, on_delete=models.CASCADE, related_name="related_links")
+    name = models.CharField(max_length=255)
+    url = models.URLField()
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("url"),
     ]
 
 
@@ -113,15 +152,4 @@ class NewsPageGalleryImage(Orderable):
     panels = [
         ImageChooserPanel("image"),
         FieldPanel("caption"),
-    ]
-
-
-class NewsPageRelatedLink(Orderable):
-    page = ParentalKey(NewsPage, on_delete=models.CASCADE, related_name="related_links")
-    name = models.CharField(max_length=255)
-    url = models.URLField()
-
-    panels = [
-        FieldPanel("name"),
-        FieldPanel("url"),
     ]

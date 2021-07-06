@@ -7,13 +7,15 @@ import modelcluster.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0004_newscategory_newstagindexpage'),
+        ("news", "0004_newscategory_newstagindexpage"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='newspage',
-            name='categories',
-            field=modelcluster.fields.ParentalManyToManyField(blank=True, to='news.NewsCategory'),
+            model_name="newspage",
+            name="categories",
+            field=modelcluster.fields.ParentalManyToManyField(
+                blank=True, to="news.NewsCategory"
+            ),
         ),
     ]
