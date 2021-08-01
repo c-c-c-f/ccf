@@ -4,7 +4,7 @@ Community prototype
 
 ## Notes
 
-Useful gitignore source: 
+Useful gitignore source:
 
 `curl https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore --output .gitignore`
 
