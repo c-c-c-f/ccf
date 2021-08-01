@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Third-party
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -152,7 +154,7 @@ USE_TZ = True
 # Static Root
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    str(BASE_DIR.joinpath('static')),
+    # str(BASE_DIR.joinpath('static')),
     os.path.join(PROJECT_DIR, "static"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")

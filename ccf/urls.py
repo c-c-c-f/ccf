@@ -31,6 +31,7 @@ urlpatterns = [
     path("pages/", include(wagtail_urls)),
     # my stuff
     re_path(r"", include("home.urls"), name="home"),
+    re_path(r"news/", include("home.urls"), name="home"),
     # wagtail catchall
     re_path(r"", include(wagtail_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
